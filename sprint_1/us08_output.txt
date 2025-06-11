@@ -1,0 +1,1 @@
+US08 - BIRTH BEFORE MARRIAGE VALIDATION PASSED: All children born within valid parental marriage windows.

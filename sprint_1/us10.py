@@ -53,8 +53,9 @@ def write_output(errors, output_file):
             f.write("US10 - PASSED: All individuals were at least 14 years old at marriage.")
 
 if __name__ == "__main__":
-    gedcom_file = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "M1B6.ged"))
-    output_file = os.path.join(os.path.dirname(__file__), "us10_output.txt")
+    base_dir = os.path.dirname(__file__)
+    gedcom_file = os.path.abspath(os.path.join(base_dir, "testing.ged"))
+    output_file = os.path.join(base_dir, "us10_output.txt")
     print(f"Checking marriage-age rules in {gedcom_file}...")
 
     individuals, families = process_gedcom_file(gedcom_file)

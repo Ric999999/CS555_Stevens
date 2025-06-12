@@ -8,7 +8,6 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from gedcom_parser import process_gedcom_file
 
-
 def parse_date(date_str):
     """Parses a date string in YYYY-MM-DD format to a datetime object."""
     if not date_str:
@@ -58,7 +57,7 @@ def write_output(errors, output_file):
 
 if __name__ == "__main__":
     base_dir = os.path.dirname(__file__)
-    gedcom_file = os.path.abspath(os.path.join(base_dir, "..", "M1B6.ged"))
+    gedcom_file = os.path.abspath(os.path.join(base_dir, "testing.ged"))
     output_file = os.path.join(base_dir, "us09_output.txt")
 
     print(f"Checking parent-death rules in {gedcom_file}...")

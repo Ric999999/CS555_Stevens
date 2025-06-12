@@ -63,3 +63,4 @@ if __name__ == "__main__":
     write_output(errors, output_file)
 
     print("Validation complete. Results saved to 'us10_output.txt'.")
+    

@@ -58,7 +58,7 @@ def write_output(errors, output_path="us01_output.txt"):
             f.write("All dates are valid and occur before today's date.\n")
 
 if __name__ == "__main__":
-    gedcom_file = "../M1B6.ged"
+    gedcom_file = "testing.ged"
     print(f"Checking dates in {gedcom_file}...\n")
 
     errors = check_dates_before_today(gedcom_file)

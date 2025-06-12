@@ -83,7 +83,7 @@ def write_output(errors, output_path="us02_output.txt"):
             f.write("All individuals were born before their marriages.\n")
 
 if __name__ == "__main__":
-    gedcom_file = "../M1B6.ged"
+    gedcom_file = "testing.ged"
     print(f"Checking birth-before-marriage in {gedcom_file}...\n")
 
     errors = check_birth_before_marriage(gedcom_file)

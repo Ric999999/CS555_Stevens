@@ -119,6 +119,7 @@ def process_gedcom_file(filename):
     print("\nValidation Errors:")
     for error in errors_us09 + errors_us10:
         print(error)
+    return individuals, families
 
 def parse_date(date_str):
     try:

@@ -55,7 +55,7 @@ def write_output(errors, output_path="us01_output.txt"):
             for err in errors:
                 f.write(err + "\n")
         else:
-            f.write("All dates are valid and occur before today's date.\n")
+            f.write("PASSED: US01: All dates are valid and occur before today's date.\n")
 
 if __name__ == "__main__":
     gedcom_file = "testing.ged"

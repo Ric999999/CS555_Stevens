@@ -1,1 +1,1 @@
-All dates are valid and occur before today's date.
+ERROR: US01: BIRT date '13 APR 2060' for  is not before today's date (line 161)

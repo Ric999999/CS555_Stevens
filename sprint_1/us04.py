@@ -1,17 +1,20 @@
 import sys
 from datetime import datetime
 
+
 def parse_date(date_str):
     try:
         return datetime.strptime(date_str, '%d %b %Y')
     except ValueError:
         return None
 
+
 def process_gedcom(filename):
     current_fam = None
     marr_date = None
     div_date = None
     fams = {}
+    error_found = False  # Track if any errors are found
 
     marr_flag = False
     div_flag = False
@@ -21,18 +24,19 @@ def process_gedcom(filename):
             line = line.strip()
             if not line:
                 continue
-            
+
             parts = line.split(' ', 2)
             level = parts[0]
             tag = parts[1] if len(parts) > 1 else ''
             args = parts[2] if len(parts) > 2 else ''
-            
+
             if level == '0' and args == 'FAM':
                 # Check previous family for divorce before marriage
                 if current_fam and marr_date and div_date and marr_date > div_date:
                     print(f"Error: {current_fam} - Divorce on {div_date.strftime('%d %b %Y')} "
                           f"before marriage on {marr_date.strftime('%d %b %Y')}")
-                
+                    error_found = True
+
                 current_fam = tag
                 marr_date = None
                 div_date = None
@@ -60,15 +64,20 @@ def process_gedcom(filename):
                         if marr_date and div_date and marr_date > div_date:
                             print(f"Error: {current_fam} - Divorce on {div_date.strftime('%d %b %Y')} "
                                   f"before marriage on {marr_date.strftime('%d %b %Y')}")
+                            error_found = True
 
         # Final check for last family
         if current_fam and marr_date and div_date and marr_date > div_date:
             print(f"Error: {current_fam} - Divorce on {div_date.strftime('%d %b %Y')} "
                   f"before marriage on {marr_date.strftime('%d %b %Y')}")
+            error_found = True
+
+    # Write pass message if no errors found
+    if not error_found:
+        with open("output.txt", "w") as out_file:
+            out_file.write("PASSED: US04: All Marriages before Divorce.\n")
+
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python us04.py <filename.ged>")
-        sys.exit(1)
-
-    process_gedcom(sys.argv[1])
+    gedcom_file = "../M1B6.ged"
+    process_gedcom(gedcom_file)

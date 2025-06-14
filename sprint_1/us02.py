@@ -80,7 +80,7 @@ def write_output(errors, output_path="us02_output.txt"):
             for err in errors:
                 f.write(err + "\n")
         else:
-            f.write("All individuals were born before their marriages.\n")
+            f.write("PASSED: US02: All individuals were born before their marriages.\n")
 
 if __name__ == "__main__":
     gedcom_file = "testing.ged"

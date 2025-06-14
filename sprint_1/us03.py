@@ -80,7 +80,7 @@ def process_gedcom(filename):
         error_found = True
 
     if not error_found:
-        with open("output.txt", "w") as out_file:
+        with open("us03_output.txt", "w") as out_file:
             out_file.write("PASSED: US03: All Births before Death.\n")
 
 if __name__ == "__main__":

@@ -57,7 +57,7 @@ def write_output(errors, output_file):
 
 if __name__ == "__main__":
     base_dir = os.path.dirname(__file__)
-    gedcom_file = os.path.abspath(os.path.join(base_dir, "testing.ged"))
+    gedcom_file = os.path.abspath(os.path.join(base_dir, "..", "M1B6.ged"))
     output_file = os.path.join(base_dir, "us09_output.txt")
 
     print(f"Checking parent-death rules in {gedcom_file}...")
@@ -67,4 +67,3 @@ if __name__ == "__main__":
     write_output(errors, output_file)
 
     print("Validation complete. Results saved to 'us09_output.txt'.")
-    

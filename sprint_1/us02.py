@@ -27,13 +27,13 @@ def check_birth_before_marriage(file_path):
         level, tag = parts[0], parts[1]
         argument = parts[2] if len(parts) > 2 else ""
 
-        if tag == "INDI":
-            current_id = argument
+        if len(parts) == 3 and parts[2] == "INDI":
+            current_id = parts[1]
             individuals[current_id] = {"BIRT": None, "FAMS": []}
             indi_section, fam_section = True, False
 
-        elif tag == "FAM":
-            current_id = argument
+        elif len(parts) == 3 and parts[2] == "FAM":
+            current_id = parts[1]
             families[current_id] = {"HUSB": None, "WIFE": None, "MARR": None}
             fam_section, indi_section = True, False
 
@@ -83,7 +83,7 @@ def write_output(errors, output_path="us02_output.txt"):
             f.write("PASSED: US02: All individuals were born before their marriages.\n")
 
 if __name__ == "__main__":
-    gedcom_file = "testing.ged"
+    gedcom_file = "../M1B6.ged"
     print(f"Checking birth-before-marriage in {gedcom_file}...\n")
 
     errors = check_birth_before_marriage(gedcom_file)

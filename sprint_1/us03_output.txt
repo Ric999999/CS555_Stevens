@@ -1,1 +1,0 @@
-PASSED: US03: All Births before Death.

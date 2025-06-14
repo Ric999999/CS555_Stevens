@@ -14,6 +14,7 @@ def process_gedcom(filename):
     death_date = None
     birth_flag = False
     death_flag = False
+    error_found = False
 
     with open(filename, 'r') as file:
         for line in file:
@@ -26,7 +27,6 @@ def process_gedcom(filename):
             tag = parts[1] if len(parts) > 1 else ''
             args = parts[2] if len(parts) > 2 else ''
 
-            # Detect new individual record
             if level == '0' and args == 'INDI':
                 # Check previous individual for birth > death
                 if current_indi and birth_date and death_date and birth_date > death_date:
@@ -34,6 +34,7 @@ def process_gedcom(filename):
                     print(f"Error: {current_indi} {name} - "
                           f"Born: {birth_date.strftime('%d %b %Y')}, "
                           f"Died: {death_date.strftime('%d %b %Y')}")
+                    error_found = True
 
                 current_indi = tag
                 birth_date = None
@@ -64,23 +65,24 @@ def process_gedcom(filename):
                         individuals[current_indi]['death'] = date
                         death_flag = False
 
-                        # Check immediately after death date
                         if birth_date and birth_date > death_date:
                             name = individuals[current_indi]['name']
                             print(f"Error: {current_indi} {name} - "
                                   f"Born: {birth_date.strftime('%d %b %Y')}, "
                                   f"Died: {death_date.strftime('%d %b %Y')}")
+                            error_found = True
 
-    # Final check for last individual
     if current_indi and birth_date and death_date and birth_date > death_date:
         name = individuals[current_indi]['name']
         print(f"Error: {current_indi} {name} - "
               f"Born: {birth_date.strftime('%d %b %Y')}, "
               f"Died: {death_date.strftime('%d %b %Y')}")
+        error_found = True
+
+    if not error_found:
+        with open("us03_output.txt", "w") as out_file:
+            out_file.write("PASSED: US03: All Births before Death.\n")
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python us03.py <filename.ged>")
-        sys.exit(1)
-
-    process_gedcom(sys.argv[1])
+    gedcom_file = "../M1B6.ged"
+    process_gedcom(gedcom_file)

@@ -1,1 +1,1 @@
-All individuals were born before their marriages.
+PASSED: US02: All individuals were born before their marriages.

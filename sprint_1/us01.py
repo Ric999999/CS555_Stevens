@@ -6,8 +6,8 @@ def is_date_before_today(date_str):
     GEDCOM format is expected to be 'DD MON YYYY', e.g., '15 MAY 1940'.
     """
     try:
-        date = datetime.strptime(date_str, "%d %b %Y")
-        return date < datetime.today()
+        date = datetime.strptime(date_str, "%d %b %Y").date()
+        return date < datetime.today().date()
     except ValueError:
         return False
 
@@ -55,10 +55,10 @@ def write_output(errors, output_path="us01_output.txt"):
             for err in errors:
                 f.write(err + "\n")
         else:
-            f.write("All dates are valid and occur before today's date.\n")
+            f.write("PASSED: US01: All dates are valid and occur before today's date.\n")
 
 if __name__ == "__main__":
-    gedcom_file = "testing.ged"
+    gedcom_file = "../M1B6.ged"
     print(f"Checking dates in {gedcom_file}...\n")
 
     errors = check_dates_before_today(gedcom_file)

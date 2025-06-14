@@ -1,1 +1,1 @@
-All dates are valid and occur before today's date.
+PASSED: US01: All dates are valid and occur before today's date.

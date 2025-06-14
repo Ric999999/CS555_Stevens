@@ -74,7 +74,7 @@ def process_gedcom(filename):
 
     # Write pass message if no errors found
     if not error_found:
-        with open("output.txt", "w") as out_file:
+        with open("us04_output.txt", "w") as out_file:
             out_file.write("PASSED: US04: All Marriages before Divorce.\n")
 
 

@@ -1,0 +1,1 @@
+PASSED: US12: All parents are within allowed age difference from children.

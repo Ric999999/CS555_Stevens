@@ -34,7 +34,7 @@ def parse_gedcom(filename):
     return individuals, families
 
 def is_descendant(individuals, families, ancestor, person):
-    """DFS to check if `person` is a descendant of `ancestor`."""
+    """DFS to check if 'person' is a descendant of 'ancestor'."""
     if ancestor not in individuals or person not in individuals:
         return False
 

@@ -17,7 +17,7 @@ def check_parents_not_too_old(file_path):
     current_id = None
     indi_section = False
     fam_section = False
-    date_context = None
+    date_context = None  # BAD SMELL #2: global mutable state for tag context
 
     for i, line in enumerate(lines):
         parts = line.strip().split(" ", 2)
@@ -45,7 +45,7 @@ def check_parents_not_too_old(file_path):
             if tag == "SEX":
                 individuals[current_id]["SEX"] = argument
             elif tag == "BIRT":
-                date_context = "BIRT"
+                date_context = "BIRT"  # BAD SMELL #2
             elif tag == "DATE" and date_context == "BIRT":
                 individuals[current_id]["BIRT"] = parse_date(argument)
                 date_context = None
@@ -71,6 +71,7 @@ def check_parents_not_too_old(file_path):
             if not child_birth:
                 continue
 
+            # BAD SMELL #1: duplicated logic for father and mother checks
             if father_birth:
                 age_diff = (child_birth - father_birth).days / 365.25
                 if age_diff > 80:
@@ -98,7 +99,7 @@ def write_output(errors, output_path="us12_output.txt"):
             f.write("PASSED: US12: All parents are within allowed age difference from children.\n")
 
 if __name__ == "__main__":
-    gedcom_file = "../M1B6.ged"
+    gedcom_file = "test_data.ged"
     print(f"Checking parent age constraints in {gedcom_file}...\n")
 
     errors = check_parents_not_too_old(gedcom_file)

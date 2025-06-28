@@ -1,0 +1,1 @@
+PASSED: US19: No first cousin marriages found.

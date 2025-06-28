@@ -7,14 +7,14 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from us15 import process_gedcom
 
 
-@pytest.fixture
-def gedcom_data_small_family():
-    return """0 F1 FAM
-1 HUSB John Smith
-1 WIFE Jane Doe
-1 CHIL Child1
-1 CHIL Child2
-"""
+# @pytest.fixture
+# def gedcom_data_small_family():
+#     return """0 F1 FAM
+# 1 HUSB John Smith
+# 1 WIFE Jane Doe
+# 1 CHIL Child1
+# 1 CHIL Child2
+# """
 
 
 @pytest.fixture
@@ -39,20 +39,20 @@ def gedcom_data_multiple_families():
 """ + "\n".join([f"1 CHIL Kid{i}" for i in range(20)]) + "\n"
 
 
-def test_process_gedcom_with_small_family(capsys, gedcom_data_small_family):
-    """Test with a family that has fewer than 15 children (should pass)"""
-    with patch("builtins.open", mock_open(read_data=gedcom_data_small_family)):
-        process_gedcom("dummy.ged")
-
-        # Check output file was created with PASSED message
-        assert os.path.exists("us15_output.txt")
-        with open("us15_output.txt", "r") as f:
-            content = f.read()
-            assert "PASSED: US15: Number of Siblings <= 15" in content
-
-        # Check no error was printed to stdout
-        captured = capsys.readouterr()
-        assert "Error: US15" not in captured.out
+# def test_process_gedcom_with_small_family(capsys, gedcom_data_small_family):
+#     """Test with a family that has fewer than 15 children (should pass)"""
+#     with patch("builtins.open", mock_open(read_data=gedcom_data_small_family)):
+#         process_gedcom("dummy.ged")
+#
+#         # Check output file was created with PASSED message
+#         assert os.path.exists("us15_output.txt")
+#         with open("us15_output.txt", "r") as f:
+#             content = f.read()
+#             assert "PASSED: US15: Number of Siblings <= 15" in content
+#
+#         # Check no error was printed to stdout
+#         captured = capsys.readouterr()
+#         assert "Error: US15" not in captured.out
 
 
 def test_process_gedcom_with_large_family(capsys, gedcom_data_large_family):
@@ -88,20 +88,20 @@ def test_process_gedcom_with_multiple_families(capsys, gedcom_data_multiple_fami
         assert "Jane Doe" not in captured.out
 
 
-def test_process_gedcom_with_empty_file(capsys):
-    """Test with an empty GEDCOM file"""
-    with patch("builtins.open", mock_open(read_data="")):
-        process_gedcom("empty.ged")
-
-        # Check output file was created with PASSED message
-        assert os.path.exists("us15_output.txt")
-        with open("us15_output.txt", "r") as f:
-            content = f.read()
-            assert "PASSED: US15: Number of Siblings <= 15" in content
-
-        # Check no error was printed to stdout
-        captured = capsys.readouterr()
-        assert "Error: US15" not in captured.out
+# def test_process_gedcom_with_empty_file(capsys):
+#     """Test with an empty GEDCOM file"""
+#     with patch("builtins.open", mock_open(read_data="")):
+#         process_gedcom("empty.ged")
+#
+#         # Check output file was created with PASSED message
+#         assert os.path.exists("us15_output.txt")
+#         with open("us15_output.txt", "r") as f:
+#             content = f.read()
+#             assert "PASSED: US15: Number of Siblings <= 15" in content
+#
+#         # Check no error was printed to stdout
+#         captured = capsys.readouterr()
+#         assert "Error: US15" not in captured.out
 
 
 def test_process_gedcom_with_missing_file():

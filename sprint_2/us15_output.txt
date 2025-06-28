@@ -1,1 +1,0 @@
-PASSED: US15: Number of Siblings <= 15

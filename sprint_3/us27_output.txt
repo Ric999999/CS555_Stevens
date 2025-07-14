@@ -1,0 +1,9 @@
+I01: Juan /Valdez/, Age at death: 65
+I02: Maria /Jimenez/, Age at death: 44
+I03: Roberto /Valdez/, Current age: 55
+I04: Susana /Valdez/, Current age: 52
+I05: James /Wilson/, Current age: 75
+I06: David /Valdez/, Current age: 30
+I07: Emily /Valdez/, Current age: 27
+I08: Sarah /Wilson/, Current age: 32
+I09: Linda /Brown/, Current age: 50

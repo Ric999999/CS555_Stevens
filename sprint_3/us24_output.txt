@@ -1,0 +1,1 @@
+PASSED: US24: No more than one family with the same spouses by name

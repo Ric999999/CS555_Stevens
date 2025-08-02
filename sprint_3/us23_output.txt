@@ -1,0 +1,1 @@
+PASSED: US23: No more than one individual with the same name and birth

@@ -1,0 +1,1 @@
+PASSED: US35: No individuals born in the last 30 days.

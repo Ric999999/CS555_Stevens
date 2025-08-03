@@ -1,0 +1,1 @@
+PASSED: US36: No individuals died in the last 30 days.
